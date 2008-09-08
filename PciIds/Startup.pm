@@ -22,7 +22,7 @@ use warnings;
 use base 'Exporter';
 
 #Where are data?
-our $directory = '/home/pciids/ids/perl/cf/';
+our $directory = '/home/pciids/ids/perl/';
 our @EXPORT=qw($directory);
 
 #Where are the modules?
