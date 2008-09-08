@@ -22,10 +22,10 @@ use warnings;
 use base 'Exporter';
 
 #Where are data?
-our $directory = '/home/vorner/prog/pciids/cf/';
+our $directory = '/home/pciids/ids/perl/cf/';
 our @EXPORT=qw($directory);
 
 #Where are the modules?
-use lib ( '/home/vorner/prog/pciids/' );
+use lib ( '/home/pciids/ids/perl/' );
 
 1;
