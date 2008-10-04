@@ -32,7 +32,7 @@ sub genNewItemForm( $$$$$$ ) {
 	my( $ok, $parent, $name, $note, $address ) = loadItem( $tables, $req->uri() );
 	return NOT_FOUND unless( $ok );
 	genHtmlHead( $req, "Add new item", undef );
-	genCustomHead( $req, $args, $address, "Add new item", [ $address->canDiscuss() ? [ 'Discuss', 'newhistory' ] : (), [ 'Help', 'help', 'newitem' ], [ 'ID syntax', 'help', $address->helpName() ], [ '', 'jump' ] ], [ logItem( $auth ), [ 'Notifications', 'notifications' ] ] );
+	genCustomHead( $req, $args, $address, "Add new item", [ $address->canDiscuss() ? [ 'Discuss', 'newhistory' ] : (), [ 'Help', 'help', 'newitem' ], [ 'ID syntax', 'help', $address->helpName() ] ], [ logItem( $auth ), [ 'Notifications', 'notifications' ] ] );
 	print "<div class='error'>$error</div>\n" if( defined $error );
 	print "<form name='newitem' id='newitem' method='POST' action=''>\n<table>";
 	genFormEx( [ [ 'input', 'ID:', 'text', 'id', 'maxlength="'.$address->subIdSize().'"' ],
@@ -52,7 +52,7 @@ sub genNewItemForm( $$$$$$ ) {
 	If there is something you want to clarify about the item, you can use note (like the ID does not belong to people using it).
 	Discussion is for things more relevant to history of the item than the real device (like information source).
 	Both note and discussion is optional.';
-	genHtmlTail();
+	genHtmlFooter( 1, $req, $args );
 	return OK;
 }
 
@@ -92,9 +92,9 @@ sub newItemSubmit( $$$$ ) {
 		if( $result eq 'exists' ) {
 			genHtmlHead( $req, 'ID collision', undef );
 			my $addr = PciIds::Address::new( $req->uri() );
-			genCustomHead( $req, $args, $addr, 'ID collision', [ [ 'Add other item', 'newitem' ], $addr->canDiscuss() ? [ 'Discuss', 'newhistory' ] : (), [ '', 'jump' ] ], [ logItem( $auth ) ] );
+			genCustomHead( $req, $args, $addr, 'ID collision', [ [ 'Add other item', 'newitem' ], $addr->canDiscuss() ? [ 'Discuss', 'newhistory' ] : (), ], [ logItem( $auth ) ] );
 			print '<p>Sorry, this ID already exists.';
-			genHtmlTail();
+			genHtmlFooter( 0, undef, undef );
 			return OK;
 		} elsif( $result ) {
 			return genNewItemForm( $req, $args, $auth, $tables, $result, $data );
@@ -113,7 +113,7 @@ sub genNewHistoryForm( $$$$$$ ) {
 	my( $ok, $parent, $name, $note, $address ) = loadItem( $tables, $req->uri() );
 	return NOT_FOUND unless( $ok );
 	genHtmlHead( $req, "Discuss", undef );
-	genCustomHead( $req, $args, $address, "Discuss", [ $address->canAddItem() ? [ 'Add item', 'newitem' ] : (), [ 'Help', 'help', 'newhistory' ], [ '', 'jump' ] ], [ logItem( $auth ),  [ 'Notifications', 'notifications' ] ] );
+	genCustomHead( $req, $args, $address, "Discuss", [ $address->canAddItem() ? [ 'Add item', 'newitem' ] : (), [ 'Help', 'help', 'newhistory' ] ], [ logItem( $auth ),  [ 'Notifications', 'notifications' ] ] );
 	print "<div class='error'>$error</div>\n" if( defined $error );
 	print "<form name='newhistory' id='newhistory' method='POST' action=''>\n<table>";
 	genFormEx( [ [ 'textarea', 'Text:', undef, 'text', 'rows="5" cols="50"' ],
@@ -137,7 +137,7 @@ sub genNewHistoryForm( $$$$$$ ) {
 	You must provide at last name or discussion or deletion request.
 <p>
 	If you provide note, you must provide name too.';
-	genHtmlTail();
+	genHtmlFooter( 1, $req, $args );
 	return OK;
 }
 

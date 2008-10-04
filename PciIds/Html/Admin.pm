@@ -113,7 +113,7 @@ sub genNewAdminForm( $$$$$ ) {
 	my $glob = delete $args->{'global'};
 	my $moreButt = 'admin?limit='.( $limit ? int( $limit * 2 ) : 160 ).buildExcept( 'action', $args );
 	$moreButt .= '?global='.$glob if defined $glob;
-	genCustomHead( $req, $args, $address, $caption, [ $address->canAddItem() ? [ 'Add item', 'newitem' ] : (), $address->canDiscuss() ? [ 'Discuss', 'newhistory' ] : (), $glob ? [ 'Local', 'admin'.buildExcept( 'action', $args ) ] : [ 'Global', 'admin?global=1'.buildExcept( 'action', $args ) ], [ 'More items', $moreButt ], [ 'Help', 'help', 'admin' ], [ '', 'jump' ] ], [ [ 'Log out', 'logout' ] ] );
+	genCustomHead( $req, $args, $address, $caption, [ $address->canAddItem() ? [ 'Add item', 'newitem' ] : (), $address->canDiscuss() ? [ 'Discuss', 'newhistory' ] : (), $glob ? [ 'Local', 'admin'.buildExcept( 'action', $args ) ] : [ 'Global', 'admin?global=1'.buildExcept( 'action', $args ) ], [ 'More items', $moreButt ], [ 'Help', 'help', 'admin' ] ], [ [ 'Log out', 'logout' ] ] );
 	print "<div class='error'>$error</div>\n" if( defined $error );
 	print "<form name='admin' id='admin' class='admin' method='POST' action=''>\n";
 	my $lastId;
@@ -194,7 +194,7 @@ function answer( id ) {
 		print "<p>No pending items.\n";
 	}
 	print "</form>\n";
-	genHtmlTail();
+	genHtmlFooter( 1, $req, $args );
 	return OK;
 }
 

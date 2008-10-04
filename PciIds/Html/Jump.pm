@@ -83,13 +83,13 @@ sub jump( $$$$ ) {
 			genHtmlHead( $req, 'Search results', undef );
 			print "<div class='top'>\n";
 			print "<h1>Search results</h1>\n";
-			genMenu( $req, $address, $args, $auth, [ [ 'Help', 'help', 'jump' ], [ '', 'jump' ] ] );
+			genMenu( $req, $address, $args, $auth, [ [ 'Help', 'help', 'jump' ] ] );
 			print "<div class='clear'></div>\n";
 			print "</div>\n";
 			genPath( $req, $address, 1 );
 			print "<h2>Found items</h2>\n";
 			genTableHead( 'found', [ 'ID', 'Name', 'Parent' ], [] );
-			my $prefix = $req->hostname().'/'.( ( !defined $args->{'action'} || $args->{'action'} eq '' || $args->{'action'} eq 'list' ) ? 'read/' : 'mods/' );
+			my $prefix = '/'.( ( !defined $args->{'action'} || $args->{'action'} eq '' || $args->{'action'} eq 'list' ) ? 'read/' : 'mods/' );
 			my $suffix = buildArgs( $args );
 			htmlFormatTable( $result, 3, [], [ sub {
 				my $addr = shift;
@@ -97,7 +97,7 @@ sub jump( $$$$ ) {
 				return "<a href='$prefix".$address->get()."$suffix'>".encode( $address->fullPretty() )."</a>";
 			} ], sub { 1; }, sub { ' class="item"'; } );
 			genTableTail();
-			genHtmlTail();
+			genHtmlFooter( 1, $req, $args );
 			return OK;
 		}
 	}
