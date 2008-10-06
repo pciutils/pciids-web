@@ -1,5 +1,8 @@
 USB
-This is USB ID.
+This is a USB ID, not a PCI ID.
 
 Device
-This is a device, not vendor.
+This is a device, not a vendor.
+
+Subsystem
+This is a subsystem, not a device.
