@@ -11,3 +11,4 @@ hostname = pci-ids.ucw.cz
 jelnet = /home/pciids/ids/perl/scripts/jelnet
 xmpp_passwd = IorekByrnison
 xmpp_name = pci-ids@ucw.cz
+default_uri = PC/
