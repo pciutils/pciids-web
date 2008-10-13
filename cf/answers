@@ -9,3 +9,7 @@ This is a device, not a vendor.
 
 Subsystem
 This is a subsystem, not a device.
+
+Doubt
+I am not sure that this ID is correct. Could you please send us
+a `lspci -vvx' dump for this device to pciids-devel@lists.sf.net?
