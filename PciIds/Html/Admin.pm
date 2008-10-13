@@ -116,6 +116,7 @@ sub genNewAdminForm( $$$$$ ) {
 	my $moreButt = 'admin?limit='.( $limit ? int( $limit * 2 ) : 160 ).buildExcept( 'action', $args );
 	$moreButt .= '?global='.$glob if defined $glob;
 	genCustomHead( $req, $args, $address, $caption, [ $address->canAddItem() ? [ 'Add item', 'newitem' ] : (), $address->canDiscuss() ? [ 'Discuss', 'newhistory' ] : (), $glob ? [ 'Local', 'admin'.buildExcept( 'action', $args ) ] : [ 'Global', 'admin?global=1'.buildExcept( 'action', $args ) ], [ 'More items', $moreButt ], [ 'Help', 'help', 'admin' ] ], [ [ 'Log out', 'logout' ] ] );
+	print "<p>Pending events: ".$tables->adminCount( $glob ? '' : $address->get() );
 	print "<div class='error'>$error</div>\n" if( defined $error );
 	print "<form name='admin' id='admin' class='admin' method='POST' action=''>\n";
 	my $lastId;
@@ -166,7 +167,7 @@ function answer( id ) {
 			print "<col class='author'><col class='main'><col class='controls' span='2'>\n";
 			print "<tr class='label'><p>\n";
 			print "<td class='path' colspan='2'>";
-			genPathBare( $req, $addr, 1, 0 );
+			genPathBare( $req, $addr, 1, 0, $tables );
 			print "<input type='hidden' name='loc-$cnt-subcnt' value='$subcnt'>" if( $subcnt );
 			$subcnt = 0;
 			$cnt ++;
