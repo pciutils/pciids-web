@@ -2,7 +2,7 @@ Details
 Could you please provide a more detailed description?
 
 USB
-This is a USB ID, not a PCI ID.
+This looks like a USB ID, not a PCI ID.
 
 Device
 This is a device, not a vendor.
@@ -13,3 +13,6 @@ This is a subsystem, not a device.
 Doubt
 I am not sure that this ID is correct. Could you please send us
 a `lspci -vvx' dump for this device to pciids-devel@lists.sf.net?
+
+No vendor
+Device/subsystem names should not contain the name of the vendor.
