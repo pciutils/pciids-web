@@ -9,9 +9,9 @@ Please use unified diffs (<tt>diff -u</tt>) against the current <a href='/v2.2/p
 encoding which is currently not understood by the robot) and avoid mail agents which convert
 tabs to spaces or wrap long lines. The classical <tt>mail</tt> utility is a safe choice.
 <p>
-If you do not have an <a href='$HELP_URL$account'>account</a> yet, one will be created for you
-automatically. You will be also sent notifications when anybody modifies the items you have
-changed (of course you can tweak the notifications, look at their <a href='$HELP_URL$notifications'>documentation</a>).
+If you do not have an <a href='$HELP_URL$account'>account</a> yet, you will to <a href='$AC_URL$register'>create</a> it first.
+The robot talks only to registered people. It talked to anyone before, but that meant responding
+to lots of SPAM messages and bothering innocent people.
 <p>
 Please note that the robot currently understands only PCI ID's. Other types of ID's (classes etc.)
 must be entered via the web interface.

@@ -34,25 +34,9 @@ my $subject = "";
 my $tables = PciIds::DBQ::new( connectDb() );
 
 my $hasAuth = $tables->dbh()->prepare( 'SELECT id FROM users WHERE email = ?' );
-my $addAuth = $tables->dbh()->prepare( "INSERT INTO users (email, passwd) VALUES(?, '')" );
 my $hasItem = $tables->dbh()->prepare( "SELECT 1 FROM locations WHERE id = ?" );
 my $addItem = $tables->dbh()->prepare( "INSERT INTO locations (id, parent) VALUES (?, ?)" );
 my $addComment = $tables->dbh()->prepare( "INSERT INTO history (owner, location, discussion, nodename, nodenote) VALUES (?, ?, ?, ?, ?)" );
-
-sub getAuthor( $ ) {
-	my( $mail ) = @_;
-	$hasAuth->execute( $mail );
-	if( my( $id ) = $hasAuth->fetchrow_array ) {
-		tlog( "mailbot: Active user ($mail) id: $id" );
-		return $id;
-	} else {
-		tlog( "mailbot: Creating user $mail" );
-		$addAuth->execute( $mail );
-		my $nid = $tables->dbh->last_insert_id( undef, undef, undef, undef );
-		tlog( "mailbot: Active user ($mail) id: $nid" );
-		return $nid;
-	}
-}
 
 sub submitItem( $$$$$ ) {
 	my( $id, $name, $description, $text, $author ) = @_;
@@ -116,6 +100,15 @@ if (!$patch) {
 
 $home = "$ENV{HOME}/";
 $tprefix = "${home}tmp/mbot-$$";
+# Little hack to stop spam: ignore everything from people not already in database
+$hasAuth->execute( $author );
+my( $authorId ) = ( $hasAuth->fetchrow_array );
+if( defined $authorId ) {
+	tlog( "mailbot: Active user ($author) id: $authorId" );
+} else {
+	blackhole("Dropping email from $author, not in database.\n");
+}
+
 mkdir("${home}tmp", 0777);
 mkdir($tprefix, 0777) || error("Cannot create tmpdir");
 chdir($tprefix) || error("Cannot chdir to tmpdir");
@@ -217,7 +210,6 @@ sub process
 			elsif (!$?) { error("No ID changes encountered."); }
 			open(DIFF, "diffs") || error("Cannot open the diff");
 			$subject = undef if $subject eq '';
-			my $authorId = getAuthor( $author );
 			my $live = (!$emulate && !$debug);
 			while (<DIFF>) {
 				chomp;
