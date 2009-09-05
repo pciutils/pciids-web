@@ -9,7 +9,7 @@ Please use unified diffs (<tt>diff -u</tt>) against the current <a href='/v2.2/p
 encoding which is currently not understood by the robot) and avoid mail agents which convert
 tabs to spaces or wrap long lines. The classical <tt>mail</tt> utility is a safe choice.
 <p>
-If you do not have an <a href='$HELP_URL$account'>account</a> yet, you will to <a href='$AC_URL$register'>create</a> it first.
+If you do not have an <a href='$HELP_URL$account'>account</a> yet, you will have to <a href='$AC_URL$register'>create</a> it first.
 The robot talks only to registered people. It talked to anyone before, but that meant responding
 to lots of SPAM messages and bothering innocent people.
 <p>
