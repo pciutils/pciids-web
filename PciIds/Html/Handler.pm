@@ -85,6 +85,9 @@ sub handler( $$ ) {
 	my $action = $args->{'action'};
 	$action = '' unless( defined $action );
 	return HTTPRedirect( $req, protoName( $hasSSL ).'://'.$req->hostname().'/' ) if $req->uri() =~ /^\/(read|mods)\/?$/  && ( $action eq '' || $action eq 'list' );
+	my $uri = $req->uri();
+	$uri =~ s/(mods|read)\/\?/$1\/?PC\//;
+	return HTTPRedirect( $req, protoName( $hasSSL ).'://'.$req->hostname().'/'.$uri ) if $req->uri() =~ /^(read|mods)\/?/;
 	my $method = $handlers{$req->method()};
 	return HTTP_METHOD_NOT_ALLOWED unless( defined $method );#Can't handle this method
 	my $sub = $method->{$action};
