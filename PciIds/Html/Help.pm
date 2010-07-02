@@ -44,6 +44,8 @@ sub getHelp( $$ ) {
 	my $url = setAddrPrefix( $req->uri(), 'read' ).buildExcept( 'help', $args ).'?help=';
 	delete $args->{'help'};
 	my %repls = ( 'HELP_URL' => $url, 'AC_URL' => setAddrPrefix( $req->uri(), 'mods' ).buildExcept( 'action', $args ).'?action=' );
+	$repls{'AC_URL'} =~ s#mods/\?#mods/PC/?#;
+	$repls{'HELP_URL'} =~ s#read/\?#read/PC/?#;
 	while( defined( my $line = <HELP> ) ) {
 		$line =~ s/\$(\w+_URL)\$/$repls{$1}/g;
 		print $line;
