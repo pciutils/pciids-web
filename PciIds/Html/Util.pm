@@ -99,7 +99,7 @@ sub genCustomMenu( $$$$ ) {
 			PciIds::Html::Jump::jumpWindow( $req, $args );
 		} else {
 			my $prefix = '/mods';
-			$prefix = '/read' if( !defined( $action ) or ( $action eq 'list' ) or ( $action eq '' ) or ( $action eq 'help' ) );
+			$prefix = '/read' if( !defined( $action ) or ( $action eq 'list' ) or ( $action eq '' ) );
 			my $suffix = '';
 			$suffix = '?help='.$param if( $action eq 'help' );
 			item( $prefix.$url.$action.$suffix, $label );
