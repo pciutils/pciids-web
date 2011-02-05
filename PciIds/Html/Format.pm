@@ -43,7 +43,9 @@ sub htmlFormatTable( $$$$$$ ) {
 			} else {
 				$func = \&encode;
 			}
-			my $data = &{$func}( $line->[ $i ] );
+			my $item = $line->[ $i ];
+			$item = "" unless( defined( $item ) );
+			my $data = &{$func}( $item );
 			$data = "" unless( defined( $data ) );
 			print $header.$data;
 		}
