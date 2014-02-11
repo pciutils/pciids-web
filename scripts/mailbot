@@ -205,7 +205,7 @@ sub process
 			print LOG `sort -k1 <new.db.unsorted >new.db`;
 			$? && error("Error sorting the patched pci.ids file");
 			print LOG "Finding ID differences.\n";
-			`diff -U0 new.db orig.db >diffs`;
+			`diff -U0 -b new.db orig.db >diffs`;
 			if ($? > 256) { error("Diff failed. Why?"); }
 			elsif (!$?) { error("No ID changes encountered."); }
 			open(DIFF, "diffs") || error("Cannot open the diff");
