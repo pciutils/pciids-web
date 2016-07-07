@@ -85,7 +85,7 @@ sub changePasswd( $$$$ ) {
 sub genAuthToken( $$$$$ ) {
 	my( $tables, $id, $req, $rights, $name ) = @_;
 	unless( defined $rights ) {#Just logged in
-		my $from = $req->connection()->remote_ip();
+		my $from = $req->useragent_ip();
 		$tables->setLastLog( $id, $from );
 		$rights = $tables->rights( $id );
 	}
