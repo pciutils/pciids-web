@@ -62,10 +62,7 @@ sub genHtmlFooter( $$$ ) {
 	print '
 <div class="footer"><hr>
 <p class="maintain">
-Maintained by <a href="http://mj.ucw.cz/">Martin Mares</a> and <a href="http://vorner.cz/">Michal
-Vaner</a> with great help by volunteers from the <a href="http://www.sourceforge.net/projects/pciids/">pciids project</a>
-at <a href="http://www.sourceforge.net/">SourceForge</a>.
-<p class="maintain">No counters, no frames, no syntax errors.
+See <a href="/">home page of the repository</a> for more information.
 </div>';
 	genHtmlTail();
 }
