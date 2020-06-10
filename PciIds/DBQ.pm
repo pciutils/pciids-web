@@ -74,13 +74,13 @@ sub new( $ ) {
 		'profiledata' => 'SELECT email, xmpp, login, mailgather, xmppgather FROM users WHERE id = ?',
 		'pushprofile' => 'UPDATE users SET xmpp = ?, login = ?, mailgather = ?, xmppgather = ? WHERE id = ?',
 		'setemail' => 'UPDATE users SET email = ?, passwd = ? WHERE id = ?',
-		'notifuser' => 'SELECT location, recursive FROM notifications WHERE user = ? ORDER BY location',
-		'notifdata' => 'SELECT recursive, type, notification FROM notifications WHERE user = ? AND location = ?',
+		'notifuser' => 'SELECT location, `recursive` FROM notifications WHERE user = ? ORDER BY location',
+		'notifdata' => 'SELECT `recursive`, type, notification FROM notifications WHERE user = ? AND location = ?',
 		'drop-notif' => 'DELETE FROM notifications WHERE user = ? AND location = ?',
-		'new-notif' => 'INSERT INTO notifications (user, location, recursive, type, notification) VALUES (?, ?, ?, ?, ?)',
-		'notify' => 'INSERT INTO pending (user, history, notification, reason) SELECT DISTINCT user, ?, ?, ? FROM notifications WHERE ( notification = 2 OR notification = ? ) AND type <= ? AND ( location = ? OR ( recursive = 1 AND SUBSTR( ?, 1, LENGTH( location ) ) = location ) )',
-		'newtime-mail' => 'UPDATE users SET nextmail = FROM_UNIXTIME( UNIX_TIMESTAMP( NOW() ) + 60 * mailgather ) WHERE nextmail < NOW() AND EXISTS ( SELECT 1 FROM notifications WHERE ( notification = 0 OR notification = 2 ) AND type <= ? AND ( location = ? OR ( recursive = 1 AND SUBSTR( ?, 1, LENGTH( location ) ) = location ) ) )',
-		'newtime-xmpp' => 'UPDATE users SET nextxmpp = FROM_UNIXTIME( UNIX_TIMESTAMP( NOW() ) + 60 * xmppgather ) WHERE nextxmpp < NOW() AND EXISTS ( SELECT 1 FROM notifications WHERE ( notification = 1 OR notification = 2 ) AND type <= ? AND ( location = ? OR ( recursive = 1 AND SUBSTR( ?, 1, LENGTH( location ) ) = location ) ) )',
+		'new-notif' => 'INSERT INTO notifications (user, location, `recursive`, type, notification) VALUES (?, ?, ?, ?, ?)',
+		'notify' => 'INSERT INTO pending (user, history, notification, reason) SELECT DISTINCT user, ?, ?, ? FROM notifications WHERE ( notification = 2 OR notification = ? ) AND type <= ? AND ( location = ? OR ( `recursive` = 1 AND SUBSTR( ?, 1, LENGTH( location ) ) = location ) )',
+		'newtime-mail' => 'UPDATE users SET nextmail = FROM_UNIXTIME( UNIX_TIMESTAMP( NOW() ) + 60 * mailgather ) WHERE nextmail < NOW() AND EXISTS ( SELECT 1 FROM notifications WHERE ( notification = 0 OR notification = 2 ) AND type <= ? AND ( location = ? OR ( `recursive` = 1 AND SUBSTR( ?, 1, LENGTH( location ) ) = location ) ) )',
+		'newtime-xmpp' => 'UPDATE users SET nextxmpp = FROM_UNIXTIME( UNIX_TIMESTAMP( NOW() ) + 60 * xmppgather ) WHERE nextxmpp < NOW() AND EXISTS ( SELECT 1 FROM notifications WHERE ( notification = 1 OR notification = 2 ) AND type <= ? AND ( location = ? OR ( `recursive` = 1 AND SUBSTR( ?, 1, LENGTH( location ) ) = location ) ) )',
 		'mailout' => 'SELECT
 				pending.user, users.email,
 				pending.reason, history.discussion, history.nodename, history.nodenote, history.time,
@@ -119,7 +119,7 @@ sub new( $ ) {
 		'searchlocalname' => 'SELECT l.id, l.name, p.name FROM locations AS l JOIN locations AS p ON l.parent = p.id WHERE l.name LIKE ? AND l.id LIKE ? ORDER BY LENGTH(l.id), l.id',
 		'hasChildren' => 'SELECT DISTINCT 1 FROM locations WHERE parent = ?',
 		'hasMain' => 'SELECT DISTINCT 1 FROM locations WHERE id = ? AND mainhistory IS NOT NULL',
-		'notif-exists' => 'SELECT DISTINCT 1 FROM notifications WHERE user = ? AND ( location = ? OR ( recursive = 1 AND type <= 1 AND SUBSTR( ?, 1, LENGTH( location ) ) = location ) )',
+		'notif-exists' => 'SELECT DISTINCT 1 FROM notifications WHERE user = ? AND ( location = ? OR ( `recursive` = 1 AND type <= 1 AND SUBSTR( ?, 1, LENGTH( location ) ) = location ) )',
 		'itemname' => 'SELECT name FROM locations WHERE id = ?',
 		'admincount' => 'SELECT COUNT( DISTINCT location ) FROM history WHERE seen = 0 AND location LIKE ?'
 	} );
