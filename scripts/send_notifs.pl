@@ -32,5 +32,5 @@ my $dbh = connectDb();
 my $tables = PciIds::DBQ::new( $dbh );
 
 sendNotifs( $tables );
-flushXmpp();
+# flushXmpp();
 $tables->commit();
