@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 set -e
 cd ~/github
 ORIG=~/ids/docs/v2.2/pci.ids

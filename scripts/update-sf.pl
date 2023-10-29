@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 set -e
 cd ~/sf.net
 rm -rf htdocs

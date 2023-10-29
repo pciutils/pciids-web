@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 #	PciIds web database
 #	Copyright (C) 2008 Michal Vaner (vorner@ucw.cz)
