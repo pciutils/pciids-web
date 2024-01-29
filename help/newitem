@@ -1,9 +1,14 @@
-Adding a new item
+Adding new items
+<h2>Adding new items</h2>
 <p>
 If you know about an ID which is not listed in the database, you are welcome
 to submit a new entry.
 <p>
-To add it, browse to its parent entry, click on the <a href='$AC_URL$newitem'>add item</a> link
+Please note that we are not assigning new IDs, only keeping records on their existence and meaning.
+(Vendor IDs are assigned by the <a href='https://pcisig.com/'>PCI SIG</a> to their members,
+device IDs by the respective vendors.)
+<p>
+To add a new entry, browse to its parent entry, click on the <a href='$AC_URL$newitem'>add item</a> link
 and enter the last part of the new ID (without the parent ID) together with its name.
 For example, when you want to submit the PCI device <tt>1234:5678</tt> (vendor ID <tt>1234</tt>,
 device ID <tt>5678</tt>) and the vendor <tt>1234</tt> already exists, go to the page of
