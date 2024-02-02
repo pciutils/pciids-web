@@ -20,34 +20,37 @@
 
 set -e
 
+mkdir -p tmp
+
 cd perl
-./scripts/export.pl PC > ../pci.ids.new
-cat cf/class_head.ids >> ../pci.ids.new
-./scripts/export.pl PD >> ../pci.ids.new
+./scripts/export.pl PC > ../tmp/pci.ids.new
+cat cf/class_head.ids >> ../tmp/pci.ids.new
+./scripts/export.pl PD >> ../tmp/pci.ids.new
 cd ..
-if ! [ -f docs/pci.ids.nohead ] || ! cmp docs/pci.ids.nohead pci.ids.new >/dev/null ; then
+
+if ! [ -f docs/pci.ids.nohead ] || ! cmp --silent docs/pci.ids.nohead tmp/pci.ids.new ; then
 	VERSION=`date '+%Y.%m.%d'`
 	DATE=`date '+%F %T'`
-	sed <perl/cf/head.ids >pci.ids.final -e "s/@VERSION@/$VERSION/;s/@DATE@/$DATE/"
-	cat pci.ids.new >> pci.ids.final
+	sed <perl/cf/head.ids >tmp/pci.ids.final -e "s/@VERSION@/$VERSION/;s/@DATE@/$DATE/"
+	cat tmp/pci.ids.new >>tmp/pci.ids.final
 
-	ln -f pci.ids.final ~/origs/00-current
-	ln -f pci.ids.final docs/pci.ids
-	ln -f pci.ids.final docs/v2.2/pci.ids
-	ln -f pci.ids.new docs/pci.ids.nohead
-	rm pci.ids.final
+	ln -f tmp/pci.ids.final ~/origs/00-current
+	ln -f tmp/pci.ids.final docs/pci.ids
+	ln -f tmp/pci.ids.final docs/v2.2/pci.ids
+	ln -f tmp/pci.ids.new docs/pci.ids.nohead
+	rm tmp/pci.ids.final
 
-	bzip2 -9c <docs/pci.ids >docs/pci.ids.bz2.new
-	mv docs/pci.ids.bz2.new docs/pci.ids.bz2
+	bzip2 -9c <docs/pci.ids >tmp/pci.ids.bz2.new
+	mv tmp/pci.ids.bz2.new docs/pci.ids.bz2
 	ln -f docs/pci.ids.bz2 docs/v2.2/
 
-	gzip -9c <docs/pci.ids >docs/pci.ids.gz.new
-	mv docs/pci.ids.gz.new docs/pci.ids.gz
+	gzip -9c <docs/pci.ids >tmp/pci.ids.gz.new
+	mv tmp/pci.ids.gz.new docs/pci.ids.gz
 	ln -f docs/pci.ids.gz docs/v2.2/
 
-	xz -c <docs/pci.ids >docs/pci.ids.xz.new
-	mv docs/pci.ids.xz.new docs/pci.ids.xz
+	xz -c <docs/pci.ids >tmp/pci.ids.xz.new
+	mv tmp/pci.ids.xz.new docs/pci.ids.xz
 	ln -f docs/pci.ids.xz docs/v2.2/
 fi
 
-rm pci.ids.new
+rm tmp/pci.ids.new
