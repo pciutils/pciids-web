@@ -1,0 +1,6 @@
+#!/bin/bash
+set -e
+
+[ -d docs ]
+rsync -av perl/static/ docs/static/
+rsync -av perl/index.html docs/
