@@ -1,0 +1,7 @@
+Too Many Requests
+
+This is likely caused by too frequent requests to the PCI ID database
+(thousands per day or more) from your IP address.
+
+If you want help with investigating the problem, please write
+to pci-admins@ucw.cz.
