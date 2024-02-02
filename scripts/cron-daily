@@ -3,5 +3,5 @@ set -e
 
 [ -d docs ]
 perl/scripts/pciids-export
-~/mirrors/bin/update-ids
+~/admin/mirrors/update-ids
 perl/scripts/update-github.sh
