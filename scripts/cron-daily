@@ -1,7 +1,0 @@
-#!/bin/bash
-set -e
-
-[ -d docs ]
-perl/scripts/pciids-export
-~/admin/mirrors/update-ids
-perl/scripts/update-github.sh
