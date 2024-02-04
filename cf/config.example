@@ -1,0 +1,16 @@
+# Example configuration file. Copy to cf/config and edit.
+
+dbname = pciids2
+dbuser = pciids2
+dbpasswd = FIXME
+passwdsalt = FIXME
+regmailsalt = FIXME
+authsalt = FIXME
+from_addr = PCI ID database <pci-ids+www@example.org>
+sendmail = /usr/sbin/sendmail
+logfile = /home/pciids/ids/log/ids.log
+hostname = pci-ids.ucw.cz
+jelnet = /home/pciids/ids/perl/scripts/jelnet
+xmpp_passwd = FIXME
+xmpp_name = pci-ids@ucw.cz
+default_uri = PC/
