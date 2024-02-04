@@ -55,10 +55,14 @@ only covers the aggregation and formatting.
 <p>If the snapshot is a couple of days old, it usually means that no changes
 were approved recently.
 
-<p>If you download the snapshots automatically, please put the name of your
-program to the <code>User-Agent</code> HTTP header and tell us
-about it. Please cache the files responsively. Thousands of requests per
-day from your automated build system could lead to a ban on your IP addresses.
+<p><em>Automated downloads:</em>
+If you download the snapshots automatically, please put the name of your
+program in the <code>User-Agent</code> HTTP header and tell us about it.
+Please cache the files responsively.
+Please use compression (by either downloading the compressed version
+or requesting <code>Accept-Encoding: gzip</code> in HTTP headers).
+Excessive downloads (hundrends of requests per day or more)
+could lead to a ban on your IP addresses.
 
 <h2>Submit new data</h2>
 
