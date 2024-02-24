@@ -61,8 +61,15 @@ program in the <code>User-Agent</code> HTTP header and tell us about it.
 Please cache the files responsively.
 Please use compression (by either downloading the compressed version
 or requesting <code>Accept-Encoding: gzip</code> in HTTP headers).
-Excessive downloads (hundrends of requests per day or more)
+Excessive downloads (hundreds of requests per day or more)
 could lead to a ban on your IP addresses.
+
+<p><em>Online queries:</em>
+Alternatively, you can query the database online via DNS. The libpci library from the <a href='https://mj.ucw.cz/sw/pciutils/'>pciutils</a>
+can do it on request. If you want to implement your own client, please ask the database
+admins for help. Again, please use the DNS interface responsively and avoid excessive
+queries. If you want to run your own replica, we are happy to provide you with
+automated zone updates.
 
 <h2>Submit new data</h2>
 
