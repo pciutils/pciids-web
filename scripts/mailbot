@@ -242,7 +242,7 @@ sub process
 sub mail_reply
 {
 	my $reason = shift @_;
-	my $sendmail_opts = "-fvorner+iderr\@ucw.cz '$reply_plain' vorner+idecho\@ucw.cz";
+	my $sendmail_opts = "-fmj+iderr\@ucw.cz '$reply_plain' mj+idecho\@ucw.cz";
 	if ($debug || $reply eq "") {
 		print "$reason\n";
 		return;
@@ -254,14 +254,14 @@ sub mail_reply
 		print LOG "Unable to ask mailer for replying!!!\n";
 		exit 1;
 	}
-	print MAIL "From: The PCI ID Robot <vorner+iderr\@ucw.cz>\n";
+	print MAIL "From: The PCI ID Robot <mj+iderr\@ucw.cz>\n";
 	print MAIL "To: $reply\n";
 	print MAIL "Subject: IDbot: $reason\n";
 	print MAIL "In-Reply-To: $msgid\n" if $msgid ne "";
 	print MAIL "\n";
 	print MAIL <<EOF
 This is an automatic reply from the PCI ID Mail Robot. If you want to contact
-the administrator of the robot, please write to pciids-devel\@lists.sourceforge.net.
+the administrator of the robot, please write to pci-admins\@ucw.cz.
 
 EOF
 ;
@@ -274,8 +274,8 @@ is a unified diff (output of diff -u) against the latest pci.ids file, that
 the diff is not reversed and that your mailer doesn't damage long lines
 and doesn't change tabs to spaces or vice versa. Also, we don't accept MIME
 attachments in base64 encoding yet. If you are unable to fix your problems,
-just use the Web interface at http://pciids.sf.net/ or submit the patch
-to pciids-devel\@lists.sourceforge.net where it will be processed manually.
+just use the Web interface at http://pci-ids.ucw.cz/ or submit the patch
+to pci-admins\@ucw.cz where it will be processed manually.
 See the log below for additional information.
 
 EOF
