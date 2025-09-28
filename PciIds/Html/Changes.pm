@@ -116,27 +116,27 @@ sub genNewHistoryForm( $$$$$$ ) {
 	genCustomHead( $req, $args, $address, "Discuss", [ $address->canAddItem() ? [ 'Add item', 'newitem' ] : (), [ 'Help', 'help', 'newhistory' ] ], [ logItem( $auth ),  [ 'Notifications', 'notifications' ] ] );
 	print "<div class='error'>$error</div>\n" if( defined $error );
 	print "<form name='newhistory' id='newhistory' method='POST' action=''>\n<table>";
-	genFormEx( [ [ 'textarea', 'Text:', undef, 'text', 'rows="5" cols="50"' ],
+	genFormEx( [ [ 'textarea', 'Discussion comment:', undef, 'text', 'rows="5" cols="50"' ],
 		[ 'input', 'Request deletion', 'checkbox', 'delete', 'value="delete"' ],
-		[ 'input', 'Name:', 'text', 'name', 'maxlength="200"' ],
-		[ 'input', 'Note:', 'text', 'note', 'maxlength="1024"' ],
+		[ 'input', 'Item name:', 'text', 'name', 'maxlength="200"' ],
+		[ 'input', 'Item note:', 'text', 'note', 'maxlength="1024"' ],
 		!$tables->notifExists( $auth->{'authid'}, $address->get() ) ? [ 'input', 'Subscribe:', 'checkbox', 'subscribe', "value='subscribe' checked='checked'" ] : (),
 		[ 'input', '', 'submit', 'submit', 'value="Submit"' ] ], $values );
 	print '</table></form>';
 	print '
 <p>
+	You can add a comment to the discussion on this item, propose a new name and/or note,
+	or request item deletion.
+	The note is stored in the database along with the item and it can provide further
+	details to the user (e.g., when a vendor name was changed due to acquisition).
+	If you change an existing item or request its deletion, please explain reasons
+	for the change in the discussion comment.
+<p>
 	Please enter only accurate information. Descriptions like "Unknown modem device" are only of a little use to anybody.
 	Real chip names and numbers are preferred over marketing names. In case you know both, enclose the marketing name in square brackets like in
 	"3c595 100BaseTX [Vortex]". Do not include names of superitems in the name (like vendor name in device name).
 	Check information specific to this <a href="'.buildExcept( 'action', $args ).'?action=help?help='.$address->helpName().'">ID type</a>.
-<p>
-	You may provide just discussion, request deletion or enter a new name and note.
-	Note is for clarification of the device information, discussion is for reasons, why you change it and like that.
-<p>
-	You may add discussion note to name change or deletion request too.
-	You must provide at last name or discussion or deletion request.
-<p>
-	If you provide note, you must provide name too.';
+';
 	genHtmlFooter( 1, $req, $args );
 	return OK;
 }
